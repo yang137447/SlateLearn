@@ -132,4 +132,37 @@ void SMyCanvas::Construct( const FArguments& InArgs )
         SNew(SImage)
         .Image(FCoreStyle::Get().GetBrush("TrashCan"))
     ];
+
+    //添加网格布局
+    AddSlot()
+    .Position(FVector2D(200, 200))
+    .Size(FVector2D(200, 200))
+    [
+        SNew(SGridPanel)
+        .FillRow(0, 1.0f)
+        .FillRow(1, 1.0f)
+        .FillColumn(0, 1.0f)
+        .FillColumn(1, 1.0f)
+        + SGridPanel::Slot(0, 0)
+        [
+            SNew(SImage)
+            .Image(FCoreStyle::Get().GetBrush("TrashCan"))
+        ]
+        + SGridPanel::Slot(1, 0)
+        [
+            SNew(SImage)
+            .Image(FCoreStyle::Get().GetBrush("TrashCan"))
+        ]
+        + SGridPanel::Slot(0, 1)
+        [
+            SNew(SImage)
+            .Image(FCoreStyle::Get().GetBrush("TrashCan"))
+        ]
+        + SGridPanel::Slot(1, 1)
+        [
+            SNew(SImage)
+            .Image(FCoreStyle::Get().GetBrush("TrashCan"))
+        ]
+    ];
+
 }
