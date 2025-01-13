@@ -16,6 +16,7 @@ void FMySlateStyle::Initialize()
 	if (!StyleInstance.IsValid())
 	{
 		StyleInstance = Create();
+
 		FSlateStyleRegistry::RegisterSlateStyle(*StyleInstance);
 	}
 }
@@ -43,6 +44,9 @@ TSharedRef< FSlateStyleSet > FMySlateStyle::Create()
 
 	Style->Set("MySlate.OpenPluginWindow", new IMAGE_BRUSH_SVG(TEXT("PlaceholderButtonIcon"), Icon20x20));
 
+	// Define the rounded corner brush
+	Style->Set("MySlate.RoundedBorder", new FSlateRoundedBoxBrush(FLinearColor::FromPow22Color(FColor(0,122,204,255)), 8.0f));
+		
 	return Style;
 }
 

@@ -1,6 +1,8 @@
+#include "MySlateStyle.h"
 #include "SMyCanvas.h"
 #include "SMyTreeView.h"
 #include "SMyListView.h"
+#include "SMyBorder.h"
 
 void SMyCanvas::Construct( const FArguments& InArgs )
 {
@@ -61,6 +63,10 @@ void SMyCanvas::Construct( const FArguments& InArgs )
         ]
     ];
 
+    FSlateColorBrush* BorderBrush = new FSlateColorBrush(FLinearColor::FromPow22Color(FColor(0,122,204,255)));
+
+    // Ensure the style is initialized
+    FMySlateStyle::Initialize();
     //添加水平和垂直盒子
     AddSlot()
     .Position(FVector2D(100, 140))
@@ -71,7 +77,8 @@ void SMyCanvas::Construct( const FArguments& InArgs )
         + SHorizontalBox::Slot()
         .FillWidth(2)
         [
-            SNew(SButton)
+            SNew(SBorder)
+            .BorderImage(FMySlateStyle::Get().GetBrush("MySlate.RoundedBorder"))
         ]
 
         + SHorizontalBox::Slot()
