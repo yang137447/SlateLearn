@@ -3,6 +3,8 @@
 #include "SMyTreeView.h"
 #include "SMyListView.h"
 #include "SMyBorder.h"
+#include "Widgets/Layout/SWrapBox.h"
+#include "Widgets/Views/STileView.h"
 
 void SMyCanvas::Construct( const FArguments& InArgs )
 {
@@ -171,5 +173,54 @@ void SMyCanvas::Construct( const FArguments& InArgs )
             .Image(FCoreStyle::Get().GetBrush("TrashCan"))
         ]
     ];
+    //添加自定义网格布局
+    AddSlot()
+    .Position(FVector2D(800, 100))
+    .Size(FVector2D(600,200))
+    [
+        SNew(SSplitter)
 
+        + SSplitter::Slot()
+        .Value(0.3f)
+        [
+            SNew(SUniformWrapPanel)
+            
+            + SUniformWrapPanel::Slot()
+            [
+                SNew(SButton)
+                .Text(FText::FromString("Button01"))
+            ]
+
+            + SUniformWrapPanel::Slot()
+            [
+                SNew(SButton)
+                .Text(FText::FromString("Button02"))
+            ]
+
+            + SUniformWrapPanel::Slot()
+            [
+                SNew(SButton)
+                .Text(FText::FromString("Button03"))
+            ]
+        ]
+
+        + SSplitter::Slot()
+        .Value(0.7f)
+        [
+            SNew(STileView<TSharedPtr<FString>>)
+            .ListItemsSource(&OptionsSource)
+            .OnGenerateTile(this, &SMyCanvas::OnGenerateTile) 
+        ]
+
+
+    ];
+}
+
+TSharedRef<ITableRow> SMyCanvas::OnGenerateTile(TSharedPtr<FString> InItem, const TSharedRef<STableViewBase> &OwnerTable)
+{
+    return SNew(STableRow<TSharedPtr<FString>>, OwnerTable)
+    [
+        SNew(STextBlock)
+        .Text(FText::FromString(*InItem))
+    ];
 }
