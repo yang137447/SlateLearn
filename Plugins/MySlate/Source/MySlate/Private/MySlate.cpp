@@ -66,6 +66,7 @@ TSharedRef<SDockTab> FMySlateModule::OnSpawnPluginTab(const FSpawnTabArgs& Spawn
 		.Text(FText::FromString("My Button"));
 
 	TSharedRef<SMyCanvas> MyCanvas = SNew(SMyCanvas);
+	//MyCanvas.Get().
 
 	return SNew(SDockTab)
 		.TabRole(ETabRole::NomadTab)
