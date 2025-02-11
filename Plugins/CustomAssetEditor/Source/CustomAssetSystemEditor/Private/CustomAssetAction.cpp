@@ -1,5 +1,6 @@
 #include "CustomAssetAction.h"
 #include "CustomDefineAsset.h"
+#include "CustomAssetSystemEditorWindow.h"
 
 CustomAssetAction::CustomAssetAction(EAssetTypeCategories::Type AssetTypeCategory)
 {
@@ -28,5 +29,21 @@ UClass *CustomAssetAction::GetSupportedClass() const
 
 void CustomAssetAction::OpenAssetEditor(const TArray<UObject *> &InObjects, TSharedPtr<IToolkitHost> EditWithinLevelEditor)
 {
-    FAssetTypeActions_Base::OpenAssetEditor(InObjects, EditWithinLevelEditor);
+    //FAssetTypeActions_Base::OpenAssetEditor(InObjects, EditWithinLevelEditor);
+
+    EToolkitMode::Type Mode = EditWithinLevelEditor.IsValid() ? EToolkitMode::WorldCentric : EToolkitMode::Standalone;
+
+    TSharedPtr<FCustomAssetSystemEditorWindow> NewCustomDefineAssetEditor(new FCustomAssetSystemEditorWindow());
+    if(NewCustomDefineAssetEditor.IsValid())
+    {
+        NewCustomDefineAssetEditor->InitAssetEditor(
+            Mode,
+            EditWithinLevelEditor,
+            FName(TEXT("CustomAssetSystemEditorWindow")),
+            FTabManager::FLayout::NullLayout,
+            true,
+            true,
+            InObjects
+            );
+    }
 }
