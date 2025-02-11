@@ -1,15 +1,15 @@
 #include "CustomAssetFactory.h"
 #include "CustomDefineAsset.h"
 
-UCustomAssetFactory::UCustomAssetFactory(const FObjectInitializer &ObjectInitializer)
+UCustomAssetFactory::UCustomAssetFactory(const FObjectInitializer& ObjectInitializer)
     :Super(ObjectInitializer)
 {
     SupportedClass = UCustomDefineAsset::StaticClass();
 }
-
-UObject *UCustomAssetFactory::FactoryCreateNew(UClass *InClass, UObject *InParent, FName InName, EObjectFlags Flags, UObject *Context, FFeedbackContext *Warn, FName CallingContext)
+UObject *UCustomAssetFactory::FactoryCreateNew(UClass *Class, UObject *InParent, FName Name, EObjectFlags Flags, UObject *Context, FFeedbackContext *Warn)
 {
-    return NewObject<UCustomDefineAsset>(InParent, InName, Flags);
+    check(Class->IsChildOf(UCustomDefineAsset::StaticClass()));
+    return NewObject<UCustomDefineAsset>(InParent, Class, Name, Flags);
 }
 
 bool UCustomAssetFactory::CanCreateNew() const

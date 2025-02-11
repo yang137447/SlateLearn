@@ -3,17 +3,21 @@
 #include "CustomAssetSystemEditor.h"
 #include "AssetToolsModule.h"
 #include "IAssetTools.h"
-#include "CustomAssetAction.h"
+#include "CustomDefineAsset.h"
+#include "CustomAssetTypeActions.h"
 
 #define LOCTEXT_NAMESPACE "FCustomAssetSystemEditorModule"
 
 void FCustomAssetSystemEditorModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
-	IAssetTools& AssetTool = IAssetTools::Get();
-	EAssetTypeCategories::Type CustomAssetCategory = AssetTool.RegisterAdvancedAssetCategory(FName(TEXT("CustomAssetCategory")), LOCTEXT("CustomAssetCategory", "Custom Asset Category"));
-	TSharedPtr<IAssetTypeActions> AssetTypeAction = MakeShareable(new CustomAssetAction(CustomAssetCategory));
-	AssetTool.RegisterAssetTypeActions(AssetTypeAction.ToSharedRef());
+	
+	//注册新资产
+	IAssetTools& AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
+	//资产类型
+	EAssetTypeCategories::Type AssetCategory = AssetTools.RegisterAdvancedAssetCategory(FName(TEXT("CustomAssetCategory")), LOCTEXT("CustomAssetCategory", "Custom Asset Category"));
+	TSharedPtr<FCustomAssetTypeActions> CustomAssetTypeActions = MakeShareable(new FCustomAssetTypeActions(AssetCategory));
+	AssetTools.RegisterAssetTypeActions(CustomAssetTypeActions.ToSharedRef());
 }
 
 void FCustomAssetSystemEditorModule::ShutdownModule()

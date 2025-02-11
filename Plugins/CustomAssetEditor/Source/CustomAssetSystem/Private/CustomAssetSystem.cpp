@@ -1,8 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "CustomAssetSystem.h"
-#include "AssetToolsModule.h"
-#include "CustomDefineAsset.h"
 
 #define LOCTEXT_NAMESPACE "FCustomAssetSystemModule"
 
