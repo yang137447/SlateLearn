@@ -40,6 +40,7 @@ public class CustomAssetSystemEditor : ModuleRules
 				"SlateCore",
 				// ... add private dependencies that you statically link with here ...	
 				"UnrealEd",
+				"EditorStyle",
 				"CustomAssetSystem",
 				"AssetTools"
 			}

@@ -1,4 +1,5 @@
 #include "CustomAssetEditor.h"
+#include "CustomAssetEditorMode.h"
 
 FName FCustomAssetEditor::GetToolkitFName() const
 {
@@ -31,4 +32,7 @@ void FCustomAssetEditor::InitEditor(const EToolkitMode::Type Mode, const TShared
         true,
         InObjects
     );
+
+    AddApplicationMode(FName("CustomAssetEditorMode"), MakeShareable(new FCustomAssetEditorMode(SharedThis(this),FName("CustomAssetEditorMode"))));
+    SetCurrentMode(FName("CustomAssetEditorMode"));
 }
