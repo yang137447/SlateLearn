@@ -12,17 +12,17 @@ FCustomAssetEditorMode::FCustomAssetEditorMode(TSharedRef<FCustomAssetEditor> In
     TabFactories.RegisterFactory(MakeShareable(new FCustomAssetDetailSummoner(InCustomAssetEditor)));
     TabFactories.RegisterFactory(MakeShareable(new FCustomAssetSearchSummoner(InCustomAssetEditor)));
 
-    TabLayout = FTabManager::NewLayout("Standalone_CustomAssetEditorLayout_v1")
+    TabLayout = FTabManager::NewLayout("Standalone_CustomAssetEditorLayout_v1_1")
     ->AddArea
     (
         FTabManager::NewPrimaryArea() ->SetOrientation(Orient_Vertical)
-        // ->Split
-        // (
-        //     FTabManager::NewStack()
-        //     ->SetSizeCoefficient(0.1f)
-        //     ->SetHideTabWell(true)
-        //     ->AddTab(InCustomAssetEditor->Getid, ETabState::OpenedTab)
-        // )
+        ->Split
+        (
+            FTabManager::NewStack()
+            ->SetSizeCoefficient(0.1f)
+            ->SetHideTabWell(true)
+            ->AddTab(InCustomAssetEditor->GetToolbarTabId(), ETabState::OpenedTab)
+        )
         ->Split
         (
             FTabManager::NewStack()

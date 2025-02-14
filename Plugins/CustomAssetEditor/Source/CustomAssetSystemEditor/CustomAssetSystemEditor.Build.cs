@@ -42,7 +42,8 @@ public class CustomAssetSystemEditor : ModuleRules
 				"UnrealEd",
 				"EditorStyle",
 				"CustomAssetSystem",
-				"AssetTools"
+				"AssetTools",
+				"InputCore"
 			}
 			);
 		

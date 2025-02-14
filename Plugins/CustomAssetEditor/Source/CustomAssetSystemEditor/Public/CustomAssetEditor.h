@@ -17,6 +17,14 @@ public:
 
     void InitEditor(const EToolkitMode::Type Mode, const TSharedPtr<class IToolkitHost> &InitToolkitHost, TArray<UObject *> InObjects);
 
+    // 菜单拓展
+    void ExtendMenu();
+
+    void AddMenuBarExtension(FMenuBarBuilder &Builder) const;
+    void AddMenuExtension(FMenuBuilder &Builder);
+    // 工具栏拓展
+    void ExtendToolbar();
+
     // 获取编辑对象
     FORCEINLINE TArray<UCustomDefineAsset *> GetCustomDefineAsset() const { return CustomDefineAsset; }
 
